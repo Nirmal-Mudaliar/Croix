@@ -1,4 +1,4 @@
-package io.nirmal.croix.ui.theme
+package io.nirmal.croix.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
