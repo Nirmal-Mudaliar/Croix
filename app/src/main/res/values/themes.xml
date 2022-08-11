@@ -3,6 +3,6 @@
 
     <style name="Theme.Croix" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/dark_gray</item>
-        <item name="android:windowBackground">@drawable/splash_screen</item>
+
     </style>
 </resources>
