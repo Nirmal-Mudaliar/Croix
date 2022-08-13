@@ -4,6 +4,7 @@
     package="io.nirmal.croix">
 
     <application
+        android:name=".CroixApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
