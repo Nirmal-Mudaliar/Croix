@@ -1,7 +1,6 @@
-package io.nirmal.croix.presentation.login
+package io.nirmal.croix.presentation.register
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,13 +21,12 @@ import io.nirmal.croix.presentation.components.StandardTextField
 import io.nirmal.croix.presentation.ui.theme.SpaceLarge
 import io.nirmal.croix.presentation.ui.theme.SpaceMedium
 import io.nirmal.croix.presentation.ui.theme.White
-import kotlin.math.log
 
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavController,
-    loginViewModel: LoginViewModel = hiltViewModel(),
+    registerViewModel: RegisterViewModel
 ) {
 
     Box(modifier = Modifier
@@ -53,42 +51,24 @@ fun LoginScreen(
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = loginViewModel.usernameText.value,
+                text = registerViewModel.usernameText.value,
                 onValueChange = {
-                    loginViewModel.setUsernameText(it)
+                    registerViewModel.setUsernameText(it)
                 },
-                error = loginViewModel.usernameError.value,
                 hint = stringResource(R.string.username_hint)
 
             )
 
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = loginViewModel.passwordText.value,
+                text = registerViewModel.passwordText.value,
                 onValueChange = {
-                    loginViewModel.setPasswordText(it)
+                    registerViewModel.setPasswordText(it)
                 },
                 hint = stringResource(R.string.password_hint),
-                error = loginViewModel.passwordError.value,
-                keyboardType = KeyboardType.Password,
-                showPasswordToggle = loginViewModel.showPassword.value,
-                onPasswordToggleClick = {
-                    loginViewModel.setShowPassword(it)
-                }
+                keyboardType = KeyboardType.Password
 
             )
-            Spacer(modifier = Modifier.height(SpaceMedium))
-            Button(
-                onClick = {  },
-                modifier = Modifier
-                    .align(Alignment.End)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.login),
-                    color = MaterialTheme.colorScheme.onPrimary
-
-                )
-            }
         }
         Text(text = buildAnnotatedString {
             append(stringResource(R.string.dont_have_an_account_yet))
