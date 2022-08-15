@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.nirmal.croix.presentation.main_feed.MainFeedScreen
 import io.nirmal.croix.presentation.splash.SplashScreen
 import io.nirmal.croix.presentation.login.LoginScreen
+import io.nirmal.croix.presentation.register.RegisterScreen
 
 @Composable
 fun Navigation() {
@@ -19,6 +21,12 @@ fun Navigation() {
         }
         composable(Screen.LoginScreen.route) {
             LoginScreen(navController = navController)
+        }
+        composable(Screen.RegisterScreen.route) {
+            RegisterScreen(navController = navController)
+        }
+        composable(Screen.MainFeedScreen.route) {
+            MainFeedScreen(navController = navController)
         }
     }
 }

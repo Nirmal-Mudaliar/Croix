@@ -1,5 +1,6 @@
 package io.nirmal.croix.presentation.login
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,7 @@ import io.nirmal.croix.presentation.components.StandardTextField
 import io.nirmal.croix.presentation.ui.theme.SpaceLarge
 import io.nirmal.croix.presentation.ui.theme.SpaceMedium
 import io.nirmal.croix.presentation.ui.theme.White
+import io.nirmal.croix.presentation.utils.Screen
 import kotlin.math.log
 
 
@@ -58,7 +60,7 @@ fun LoginScreen(
                     loginViewModel.setUsernameText(it)
                 },
                 error = loginViewModel.usernameError.value,
-                hint = stringResource(R.string.username_hint)
+                hint = stringResource(R.string.username_email)
 
             )
 
@@ -68,7 +70,7 @@ fun LoginScreen(
                 onValueChange = {
                     loginViewModel.setPasswordText(it)
                 },
-                hint = stringResource(R.string.password_hint),
+                hint = stringResource(R.string.password),
                 error = loginViewModel.passwordError.value,
                 keyboardType = KeyboardType.Password,
                 showPasswordToggle = loginViewModel.showPassword.value,
@@ -79,7 +81,9 @@ fun LoginScreen(
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             Button(
-                onClick = {  },
+                onClick = {
+                    navController.navigate(Screen.MainFeedScreen.route)
+                },
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
@@ -104,6 +108,9 @@ fun LoginScreen(
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
+                .clickable {
+                    navController.navigate(Screen.RegisterScreen.route)
+            }
         )
     }
 

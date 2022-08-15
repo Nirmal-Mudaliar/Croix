@@ -31,7 +31,7 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Black,
     onPrimary = White,
     surface = White,
-    onSurface = Black,
+    onSurface = Gray,
 
 
     /* Other default colors to override
@@ -72,5 +72,6 @@ fun CroixTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
+
     )
 }

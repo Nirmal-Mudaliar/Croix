@@ -1,6 +1,8 @@
 package io.nirmal.croix.presentation.register
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,12 +23,14 @@ import io.nirmal.croix.presentation.components.StandardTextField
 import io.nirmal.croix.presentation.ui.theme.SpaceLarge
 import io.nirmal.croix.presentation.ui.theme.SpaceMedium
 import io.nirmal.croix.presentation.ui.theme.White
+import io.nirmal.croix.presentation.utils.Screen
+import kotlin.math.log
 
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    registerViewModel: RegisterViewModel
+    loginViewModel: RegisterViewModel = hiltViewModel(),
 ) {
 
     Box(modifier = Modifier
@@ -45,35 +49,64 @@ fun RegisterScreen(
                 .align(Alignment.Center)
         ) {
             Text(
-                text = stringResource(R.string.login),
+                text = stringResource(R.string.register),
                 color = MaterialTheme.colorScheme.onBackground,
                 style = MaterialTheme.typography.headlineLarge,
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = registerViewModel.usernameText.value,
+                text = loginViewModel.emailText.value,
                 onValueChange = {
-                    registerViewModel.setUsernameText(it)
+                    loginViewModel.setEmailText(it)
                 },
-                hint = stringResource(R.string.username_hint)
+                error = loginViewModel.emailError.value,
+                hint = stringResource(R.string.email)
 
             )
 
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = registerViewModel.passwordText.value,
+                text = loginViewModel.usernameText.value,
                 onValueChange = {
-                    registerViewModel.setPasswordText(it)
+                    loginViewModel.setUsernameText(it)
                 },
-                hint = stringResource(R.string.password_hint),
-                keyboardType = KeyboardType.Password
+                error = loginViewModel.usernameError.value,
+                hint = stringResource(R.string.username)
 
             )
+
+            Spacer(modifier = Modifier.height(SpaceMedium))
+            StandardTextField(
+                text = loginViewModel.passwordText.value,
+                onValueChange = {
+                    loginViewModel.setPasswordText(it)
+                },
+                hint = stringResource(R.string.password),
+                error = loginViewModel.passwordError.value,
+                keyboardType = KeyboardType.Password,
+                showPasswordToggle = loginViewModel.showPassword.value,
+                onPasswordToggleClick = {
+                    loginViewModel.setShowPassword(it)
+                }
+
+            )
+            Spacer(modifier = Modifier.height(SpaceMedium))
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .align(Alignment.End)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.register),
+                    color = MaterialTheme.colorScheme.onPrimary
+
+                )
+            }
         }
         Text(text = buildAnnotatedString {
-            append(stringResource(R.string.dont_have_an_account_yet))
+            append(stringResource(R.string.already_have_an_account))
             append(" ")
-            val signUpText = stringResource(id = R.string.sign_up)
+            val signUpText = stringResource(id = R.string.sign_in)
             withStyle(style = SpanStyle(
                 color = MaterialTheme.colorScheme.primary
             )) {
@@ -84,6 +117,10 @@ fun RegisterScreen(
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
+                .clickable {
+                    navController.popBackStack()
+                }
+
         )
     }
 
