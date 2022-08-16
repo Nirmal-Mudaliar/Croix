@@ -1,10 +1,23 @@
 package io.nirmal.croix.presentation.main_feed
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.nirmal.croix.presentation.components.Post
+import io.nirmal.croix.presentation.components.StandardScaffold
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainFeedScreen(
     navController: NavController
@@ -19,5 +32,4 @@ fun MainFeedScreen(
             commentCount = 6
         )
     )
-    
 }

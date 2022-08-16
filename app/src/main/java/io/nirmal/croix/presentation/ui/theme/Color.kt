@@ -13,6 +13,7 @@ val GreenAccent = Color(0xFF08FF04)
 val TextGray = Color(0xFFA6A6A6)
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
+val notificationColor = Color(0xFFF70404)
 
 //val Purple80 = Color(0xFFD0BCFF)
 //val PurpleGrey80 = Color(0xFFCCC2DC)
