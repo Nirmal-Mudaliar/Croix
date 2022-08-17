@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
@@ -31,14 +32,17 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                     StandardScaffold(
+                        modifier = Modifier.fillMaxWidth(),
                         navController = navController,
                         showBottomBar = navBackStackEntry?.destination?.route in listOf(
                             Screen.MainFeedScreen.route,
                             Screen.ChatScreen.route,
                             Screen.ActivityScreen.route,
                             Screen.ProfileScreen.route
-                        ) ,
-                        modifier = Modifier.fillMaxSize()
+                        ),
+                        onFabClick = {
+                            navController.navigate(Screen.CreatePostScreen.route)
+                        }
                     ) {
                         Navigation(navController)
                     }

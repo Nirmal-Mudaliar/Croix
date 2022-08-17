@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.nirmal.croix.presentation.activity.ActivityScreen
 import io.nirmal.croix.presentation.chat.ChatScreen
+import io.nirmal.croix.presentation.create_post.CreatePostScreen
 import io.nirmal.croix.presentation.main_feed.MainFeedScreen
 import io.nirmal.croix.presentation.splash.SplashScreen
 import io.nirmal.croix.presentation.login.LoginScreen
@@ -46,6 +47,9 @@ fun Navigation(
         }
         composable(Screen.ProfileScreen.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(Screen.CreatePostScreen.route) {
+            CreatePostScreen(navController = navController)
         }
     }
 }

@@ -2,18 +2,13 @@ package io.nirmal.croix.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddAlert
-import androidx.compose.material.icons.filled.Chat
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +19,6 @@ import androidx.navigation.NavController
 import io.nirmal.croix.R
 import io.nirmal.croix.domain.models.BottomNavItem
 import io.nirmal.croix.presentation.utils.Screen
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,9 +40,10 @@ fun StandardScaffold(
             contentDescription = "Message",
 
             ),
+        BottomNavItem(route = ""),
         BottomNavItem(
             route = Screen.ActivityScreen.route,
-            icon = Icons.Outlined.Doorbell,
+            icon = Icons.Outlined.Notifications,
             contentDescription = "Activity",
 
             ),
@@ -59,30 +54,33 @@ fun StandardScaffold(
 
             ),
     ),
+    onFabClick: () -> Unit = {},
     content: @Composable () -> Unit) {
-    Scaffold(
+    androidx.compose.material.Scaffold(
         bottomBar = {
             if (showBottomBar) {
                 BottomAppBar(
                     modifier = Modifier.fillMaxWidth(),
                     cutoutShape = CircleShape,
-                    backgroundColor = MaterialTheme.colorScheme.surface,
-                    elevation = 5.dp
+                    backgroundColor = Color.White,
+                    elevation = 8.dp
                 ) {
                     BottomNavigation(
-
                         backgroundColor = Color.White
                     ) {
                         bottomNavItems.forEachIndexed { i, bottomNavItem ->
+
                             StandardBottomNavItem(
                                 icon = bottomNavItem.icon,
                                 contentDescription = bottomNavItem.contentDescription,
                                 selected = bottomNavItem.route == navController.currentDestination?.route,
                                 alertCount = bottomNavItem.alertCount,
-
+                                enabled = bottomNavItem.icon != null
                                 ) {
-                                //standardScaffoldViewModel.setSelectedBottomNavItem(i)
-                                navController.navigate(bottomNavItem.route)
+                                if (navController.currentDestination?.route != bottomNavItem.route) {
+                                    navController.navigate(bottomNavItem.route)
+                                }
+
                             }
 
                         }
@@ -92,8 +90,28 @@ fun StandardScaffold(
                 }
             }
 
+
         },
-        modifier = modifier
+
+        floatingActionButton = {
+            if (showBottomBar) {
+                FloatingActionButton(
+                    backgroundColor =  Color(0xFFD1BEFF),
+                    contentColor = Color.Black,
+                    onClick = onFabClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(id = R.string.make_post)
+                    )
+                }
+            }
+
+        },
+
+        modifier = modifier,
+        isFloatingActionButtonDocked = true,
+        floatingActionButtonPosition = FabPosition.Center
     ) {
         content()
     }

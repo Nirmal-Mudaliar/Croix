@@ -1,6 +1,8 @@
 package io.nirmal.croix.presentation.components
 
 import android.widget.ImageView
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -30,7 +32,7 @@ import io.nirmal.croix.presentation.ui.theme.notificationColor
 @Throws(IllegalArgumentException::class)
 fun RowScope.StandardBottomNavItem(
     modifier: Modifier = Modifier,
-    icon: ImageVector,
+    icon: ImageVector? = null,
     contentDescription: String? = null,
     selected: Boolean = false,
     alertCount: Int? = null,
@@ -42,6 +44,12 @@ fun RowScope.StandardBottomNavItem(
     if (alertCount != null && alertCount < 0) {
         throw IllegalArgumentException("Alert count cant be nagative")
     }
+    val lineLength = animateFloatAsState(
+        targetValue = if(selected) 1f else 0f,
+        animationSpec = tween(
+            durationMillis = 300
+        )
+    )
     BottomNavigationItem(
         selected = selected,
         onClick = onClick,
@@ -54,26 +62,29 @@ fun RowScope.StandardBottomNavItem(
                     .fillMaxSize()
                     .padding(SpaceSmall)
                     .drawBehind {
-                       if (selected) {
-                           drawLine(
-                               color = if (selected) {
-                                   selectedColor
-                               } else {
-                                   unSelectedColor
-                               },
-                               start = Offset(size.width/2f - 15.dp.toPx(), size.height),
-                               end = Offset(size.width/2f + 15.dp.toPx(), size.height),
-                               strokeWidth = 2.dp.toPx(),
-                               cap = StrokeCap.Round
-                           )
-                       }
+                        if (selected) {
+                            drawLine(
+                                color = if (selected) {
+                                    selectedColor
+                                } else {
+                                    unSelectedColor
+                                },
+                                start = Offset(size.width / 2f - lineLength.value * 15.dp.toPx(), size.height),
+                                end = Offset(size.width / 2f + lineLength.value * 15.dp.toPx(), size.height),
+                                strokeWidth = 2.dp.toPx(),
+                                cap = StrokeCap.Round
+                            )
+                        }
                     }
             ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = contentDescription,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                if (icon != null) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = contentDescription,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+
                 if (alertCount != null) {
                     val alertText = if (alertCount > 99) {
                         "99+"
@@ -87,7 +98,7 @@ fun RowScope.StandardBottomNavItem(
                         textAlign = TextAlign.Center,
                         fontSize = 10.sp,
                         modifier = Modifier
-                            .align(Alignment.TopCenter )
+                            .align(Alignment.TopCenter)
                             .offset(13.dp)
                             .size(18.dp)
                             .clip(CircleShape)
