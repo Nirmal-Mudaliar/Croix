@@ -1,5 +1,6 @@
 package io.nirmal.croix.presentation.components
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -27,6 +28,10 @@ fun StandardScaffold(
     navController: NavController,
     modifier: Modifier = Modifier,
     showBottomBar: Boolean = true,
+    showToolbar: Boolean = true,
+    toolbarTitle: String? = null,
+    showBackArrow: Boolean = true,
+    navActions: @Composable RowScope.()->Unit = {},
     bottomNavItems: List<BottomNavItem> = listOf(
         BottomNavItem(
             route = Screen.MainFeedScreen.route,
@@ -57,6 +62,7 @@ fun StandardScaffold(
     onFabClick: () -> Unit = {},
     content: @Composable () -> Unit) {
     androidx.compose.material.Scaffold(
+
         bottomBar = {
             if (showBottomBar) {
                 BottomAppBar(

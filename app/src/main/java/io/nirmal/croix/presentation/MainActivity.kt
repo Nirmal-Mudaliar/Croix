@@ -1,6 +1,7 @@
 package io.nirmal.croix.presentation
 
 import android.os.Bundle
+import android.view.Surface
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,10 +10,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import io.nirmal.croix.R
 import io.nirmal.croix.presentation.components.StandardScaffold
 import io.nirmal.croix.presentation.ui.theme.CroixTheme
 import io.nirmal.croix.presentation.utils.Navigation
@@ -39,6 +42,14 @@ class MainActivity : ComponentActivity() {
                             Screen.ChatScreen.route,
                             Screen.ActivityScreen.route,
                             Screen.ProfileScreen.route
+                        ),
+                        showBackArrow = navBackStackEntry?.destination?.route in listOf(
+                            Screen.PostDetailScreen.route,
+                            Screen.MessagesScreen.route,
+                            Screen.EditProfileScreen.route,
+                            Screen.SearchScreen.route,
+                            Screen.CreatePostScreen.route,
+                            Screen.PersonListScreen.route
                         ),
                         onFabClick = {
                             navController.navigate(Screen.CreatePostScreen.route)
