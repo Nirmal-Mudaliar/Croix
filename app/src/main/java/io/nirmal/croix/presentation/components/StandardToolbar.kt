@@ -40,7 +40,7 @@ fun StandardToolbar(
             }
         } else null,
         actions = navActions,
-        backgroundColor = MaterialTheme.colorScheme.surface,
+        backgroundColor = MaterialTheme.colorScheme.background,
         elevation = 5.dp
     )
     

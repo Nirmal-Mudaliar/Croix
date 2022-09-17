@@ -8,12 +8,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.nirmal.croix.domain.models.Post
 import io.nirmal.croix.presentation.activity.ActivityScreen
 import io.nirmal.croix.presentation.chat.ChatScreen
 import io.nirmal.croix.presentation.create_post.CreatePostScreen
 import io.nirmal.croix.presentation.main_feed.MainFeedScreen
 import io.nirmal.croix.presentation.splash.SplashScreen
 import io.nirmal.croix.presentation.login.LoginScreen
+import io.nirmal.croix.presentation.post_detail.PostDetailScreen
 import io.nirmal.croix.presentation.profile.ProfileScreen
 import io.nirmal.croix.presentation.register.RegisterScreen
 
@@ -50,6 +52,19 @@ fun Navigation(
         }
         composable(Screen.CreatePostScreen.route) {
             CreatePostScreen(navController = navController)
+        }
+        composable(Screen.PostDetailScreen.route) {
+            PostDetailScreen(
+                navController = navController,
+                post = Post(
+                    username = "Nirmal Mudaliar",
+                    imageUrl = "",
+                    profilePictureUrl = "",
+                    description = "kj kjdkf jkj kjdflj kdj k jdf kkljkdhjhjdf jhkjh dhjkdhfjkshiodjlkfgj j lkj lkjkf j kj kjkl    jjlkjlksjdflkj kjf lkjfk              jkfjfksj             jdksjfkljllkjdlfj kj kjdkf jkj kjdsdfgdfsg dfgdfg sdfgdfg dsfg dfg sdfg sdf dsfg fdg s dfg gfflj kdj k jdf kkljkdjkj kjdkf jkj kjdflj kdj k jdf kkljkdj kj kjdkf jkj kjdflj kdj k jdf kkljkdj",
+                    likeCount = 10,
+                    commentCount = 6
+                )
+            )
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -21,6 +22,7 @@ import io.nirmal.croix.R
 import io.nirmal.croix.presentation.components.Post
 import io.nirmal.croix.presentation.components.StandardScaffold
 import io.nirmal.croix.presentation.components.StandardToolbar
+import io.nirmal.croix.presentation.utils.Screen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,11 +43,13 @@ fun MainFeedScreen(
                 )
             },
             modifier = Modifier.fillMaxWidth(),
-            showBackArrow = true,
+            showBackArrow = false,
             navActions = {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    navController.navigate(Screen.SearchScreen.route)
+                }) {
                     Icon(
-                        imageVector = Icons.Default.Add,
+                        imageVector = Icons.Default.Search,
                         contentDescription = "",
                         tint = MaterialTheme.colorScheme.onBackground
                     )
@@ -59,10 +63,13 @@ fun MainFeedScreen(
                 username = "Nirmal Mudaliar",
                 imageUrl = "",
                 profilePictureUrl = "",
-                description = "kj kjdkf jkj kjdflj kdj k jdf kkljkdj kj kjdkf jkj kjdsdfgdfsg dfgdfg sdfgdfg dsfg dfg sdfg sdf dsfg fdg s dfg gfflj kdj k jdf kkljkdjkj kjdkf jkj kjdflj kdj k jdf kkljkdj kj kjdkf jkj kjdflj kdj k jdf kkljkdj",
+                description = "kj kjdkf jkj kjdflj kdj k jdf kkljkdj kj kjdkf jkj kjdsdfgdfsg dfgdfg sdfgdfg This is Nirma; dsfg dfg sdfg sdf dsfg fdg s dfg gfflj kdj k jdf kkljkdjkj kjdkf jkj kjdflj kdj k jdf kkljkdj kj kjdkf jkj kjdflj kdj k jdf kkljkdj hi",
                 likeCount = 10,
                 commentCount = 6
-            )
+            ),
+            onPostClick = {
+                navController.navigate(Screen.PostDetailScreen.route)
+            }
         )
         Post(
             post = io.nirmal.croix.domain.models.Post(
