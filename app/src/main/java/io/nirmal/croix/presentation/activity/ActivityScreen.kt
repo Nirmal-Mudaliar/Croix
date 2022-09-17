@@ -29,7 +29,6 @@ import io.nirmal.croix.presentation.components.ActionRow
 import io.nirmal.croix.presentation.components.StandardScaffold
 import io.nirmal.croix.presentation.components.StandardToolbar
 import io.nirmal.croix.presentation.post_detail.Comment
-import io.nirmal.croix.presentation.ui.theme.ProfilePictureSize
 import io.nirmal.croix.presentation.ui.theme.SpaceLarge
 import io.nirmal.croix.presentation.ui.theme.SpaceMedium
 import io.nirmal.croix.presentation.ui.theme.SpaceSmall

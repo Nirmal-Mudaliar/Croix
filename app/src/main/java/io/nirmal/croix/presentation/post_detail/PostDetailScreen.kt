@@ -93,7 +93,7 @@ fun PostDetailScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .offset(y = ProfilePictureSize / 2f)
+                                .offset(y = ProfilePictureSizeMedium / 2f)
                                 .clip(RoundedCornerShape(8.dp))
                                 .shadow(5.dp)
                                 .background(MaterialTheme.colorScheme.surface)
@@ -154,7 +154,7 @@ fun PostDetailScreen(
                             painterResource(id = R.drawable.profile),
                             contentDescription = "Profile Picture",
                             modifier = Modifier
-                                .size(ProfilePictureSize)
+                                .size(ProfilePictureSizeMedium)
                                 .clip(CircleShape)
                                 .align(Alignment.TopCenter)
                         )

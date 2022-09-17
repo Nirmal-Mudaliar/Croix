@@ -22,7 +22,7 @@
     <string name="home">home</string>
     <string name="chat">chat</string>
     <string name="activity">activity</string>
-    <string name="profile">profile</string>
+    <string name="profile">Profile</string>
     <string name="make_post">Make post</string>
     <string name="back">Navigate back</string>
     <string name="your_feed">Your feed</string>
@@ -30,4 +30,12 @@
     <string name="commented_on">commented on</string>
     <string name="your_post">your post</string>
     <string name="your_activity">Your activity</string>
+    <string name="banner_image">banner image</string>
+    <string name="profile_image">profile image</string>
+    <string name="edit">edit</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="post_count">Posts</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="follow">Follow</string>
 </resources>

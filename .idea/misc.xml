@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_c_sharp.xml" value="0.2285" />
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_github.xml" value="0.2285" />
         <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_home.xml" value="0.2285" />
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_instagram.xml" value="0.2285" />
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_js.xml" value="0.2285" />
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_kotlin.xml" value="0.14666666666666667" />
+        <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_linkedin.xml" value="0.2285" />
         <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/ic_logo.xml" value="0.2285" />
         <entry key="..\:/MyData/Nirmal/AndroidStudioProjects/Croix/app/src/main/res/drawable/splash_screen.xml" value="0.2285" />
       </map>

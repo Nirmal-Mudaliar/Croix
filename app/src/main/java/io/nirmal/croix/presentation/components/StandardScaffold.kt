@@ -2,13 +2,16 @@ package io.nirmal.croix.presentation.components
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SmallFloatingActionButton
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -66,13 +69,20 @@ fun StandardScaffold(
         bottomBar = {
             if (showBottomBar) {
                 BottomAppBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    cutoutShape = CircleShape,
-                    backgroundColor = Color.White,
-                    elevation = 8.dp
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(0.dp),
+                    backgroundColor = Color(0xFFFFFFFF),
+                    cutoutShape = RoundedCornerShape(26.dp),
+                    elevation = 10.dp,
+
+
                 ) {
                     BottomNavigation(
-                        backgroundColor = Color.White
+                        backgroundColor = Color(0xFFFFFFFF),
+                        modifier = modifier.fillMaxWidth(),
+                        elevation = 0.dp
+
                     ) {
                         bottomNavItems.forEachIndexed { i, bottomNavItem ->
 
@@ -101,14 +111,17 @@ fun StandardScaffold(
 
         floatingActionButton = {
             if (showBottomBar) {
-                FloatingActionButton(
-                    backgroundColor =  Color(0xFFD1BEFF),
-                    contentColor = Color.Black,
-                    onClick = onFabClick
+                androidx.compose.material3.FloatingActionButton(
+                    contentColor = Color.White,
+                    onClick = onFabClick,
+                    containerColor = Color(0xFF2A2A2A)
+
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(id = R.string.make_post)
+                        contentDescription = stringResource(id = R.string.make_post),
+                        tint = Color.White
+
                     )
                 }
             }

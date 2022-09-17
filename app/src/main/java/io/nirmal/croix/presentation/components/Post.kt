@@ -47,6 +47,8 @@ import io.nirmal.croix.util.Constants
 @Composable
 fun Post(
     post: Post,
+    modifier: Modifier = Modifier,
+    showProfileImage: Boolean = true,
     onPostClick: () -> Unit = {}
 ) {
     Box(modifier = Modifier
@@ -57,7 +59,7 @@ fun Post(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset(y = ProfilePictureSize / 2f)
+                .offset(y = if (showProfileImage) ProfilePictureSizeMedium / 2f else 0.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .shadow(5.dp)
                 .background(Color(0xFFF3F3F3))
@@ -141,14 +143,17 @@ fun Post(
             }
 
         }
-        Image(
-            painterResource(id = R.drawable.profile),
-            contentDescription = "Profile Picture",
-            modifier = Modifier
-                .size(ProfilePictureSize)
-                .clip(CircleShape)
-                .align(Alignment.TopCenter)
-        )
+        if (showProfileImage) {
+            Image(
+                painterResource(id = R.drawable.profile),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(ProfilePictureSizeMedium)
+                    .clip(CircleShape)
+                    .align(Alignment.TopCenter)
+            )
+        }
+
     }
 }
 
