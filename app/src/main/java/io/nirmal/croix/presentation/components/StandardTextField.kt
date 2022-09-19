@@ -3,6 +3,7 @@ package io.nirmal.croix.presentation.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.IconButton
@@ -17,20 +18,29 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import io.nirmal.croix.R
+import io.nirmal.croix.presentation.ui.theme.IconSizeMedium
 
 @Composable
 fun StandardTextField(
+    modifier: Modifier = Modifier,
     text: String = "",
     hint: String = "",
     error: String = "dsd",
+    singleLine: Boolean = true,
+    maxLines: Int = 1,
     maxlenght: Int = 40,
+    leadingIcon: ImageVector? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordToggleDisplayed: Boolean = keyboardType == KeyboardType.Password,
     showPasswordToggle: Boolean = false,
@@ -48,6 +58,7 @@ fun StandardTextField(
                     onValueChange(it)
                 }
             },
+            maxLines = maxLines,
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.onBackground),
@@ -60,13 +71,25 @@ fun StandardTextField(
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),
-            singleLine = true,
+            singleLine = singleLine,
+            leadingIcon = if (leadingIcon != null) {
+                {
+                    Icon(
+                        imageVector = leadingIcon,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(IconSizeMedium)
+                    )
+                }
+
+            } else null,
             visualTransformation = if (!showPasswordToggle && isPasswordToggleDisplayed) {
                 PasswordVisualTransformation()
             } else {
                 VisualTransformation.None
             },
-            trailingIcon = {
+            trailingIcon = if (isPasswordToggleDisplayed) {
+            {
                 if (isPasswordToggleDisplayed)
                     IconButton(onClick = {
                         onPasswordToggleClick(!showPasswordToggle)
@@ -84,7 +107,8 @@ fun StandardTextField(
                             }
                         )
                     }
-            },
+            }
+            }else null,
             modifier = Modifier.fillMaxWidth()
 
         )

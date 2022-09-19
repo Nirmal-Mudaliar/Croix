@@ -2,38 +2,48 @@ package io.nirmal.croix.presentation.profile.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.nirmal.croix.R
+import io.nirmal.croix.presentation.ui.theme.ProfilePictureSizeLarge
 import io.nirmal.croix.presentation.ui.theme.SpaceMedium
 import io.nirmal.croix.presentation.ui.theme.SpaceSmall
 import io.nirmal.croix.presentation.utils.toPx
 
 @Composable
 fun BannerSection(
-    modifier: Modifier,
-    iconSize: Dp = 30.dp,
+    modifier: Modifier = Modifier,
+    imageModifier: Modifier = Modifier,
+    iconSize: Dp = 35.dp,
+    leftIconModifier: Modifier = Modifier,
+    rightIconModifier: Modifier = Modifier,
+    onIconGroupWidthChange: (Int) -> Unit = {},
     onGitHubClick: () -> Unit = {},
     onInstagramClick: () -> Unit = {},
-    onLinkedinClick: () -> Unit = {}
-
+    onLinkedInClick: () -> Unit = {}
 ) {
-    BoxWithConstraints(modifier = modifier) {
+    BoxWithConstraints(
+        modifier = modifier
+    ) {
         Image(
             painter = painterResource(id = R.drawable.img2),
             contentDescription = stringResource(id = R.string.banner_image),
-            modifier = modifier
+            contentScale = ContentScale.Crop,
+            modifier = imageModifier
                 .fillMaxSize()
-
         )
         Box(
             modifier = Modifier
@@ -42,15 +52,14 @@ fun BannerSection(
                     brush = Brush.verticalGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.Black,
+                            Color.Black
                         ),
-                        startY = constraints.maxHeight - iconSize.toPx() * 2f,
-
+                        startY = constraints.maxHeight - iconSize.toPx() * 2f
                     )
                 )
         )
         Row(
-            modifier = Modifier
+            modifier = leftIconModifier
                 .height(iconSize)
                 .align(Alignment.BottomStart)
                 .padding(SpaceSmall)
@@ -58,17 +67,16 @@ fun BannerSection(
             Spacer(modifier = Modifier.width(SpaceSmall))
             Image(
                 painter = painterResource(id = R.drawable.ic_js),
-                contentDescription = "JavaScript",
+                contentDescription = "Javscript",
                 modifier = Modifier.height(iconSize)
             )
             Spacer(modifier = Modifier.width(SpaceMedium))
             Image(
                 painter = painterResource(id = R.drawable.ic_c_sharp),
-                contentDescription = "C Sharp",
+                contentDescription = "C#",
                 modifier = Modifier.height(iconSize)
             )
             Spacer(modifier = Modifier.width(SpaceMedium))
-
             Image(
                 painter = painterResource(id = R.drawable.ic_kotlin),
                 contentDescription = "Kotlin",
@@ -77,7 +85,7 @@ fun BannerSection(
         }
 
         Row(
-            modifier = Modifier
+            modifier = rightIconModifier
                 .height(iconSize)
                 .align(Alignment.BottomEnd)
                 .padding(SpaceSmall)
@@ -85,14 +93,13 @@ fun BannerSection(
             IconButton(
                 onClick = onGitHubClick,
                 modifier = Modifier.size(iconSize)
-                ) {
+            ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_github),
-                    contentDescription = "Github",
+                    contentDescription = "GitHub",
                     modifier = Modifier.size(iconSize)
                 )
             }
-
             IconButton(
                 onClick = onInstagramClick,
                 modifier = Modifier.size(iconSize)
@@ -103,19 +110,16 @@ fun BannerSection(
                     modifier = Modifier.size(iconSize)
                 )
             }
-
             IconButton(
-                onClick = onLinkedinClick,
+                onClick = onLinkedInClick,
                 modifier = Modifier.size(iconSize)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_linkedin),
-                    contentDescription = "Linkedin",
+                    contentDescription = "LinkedIn",
                     modifier = Modifier.size(iconSize)
                 )
             }
-
         }
     }
-
 }

@@ -36,50 +36,34 @@ fun ProfileHeaderSection(
     isOwnProfile: Boolean = true,
     onEditClick: () -> Unit = {}
 ) {
-    
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .offset(y = -ProfilePictureSizeLarge / 2f),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.profile),
-            contentDescription = stringResource(id = R.string.profile_image),
-            modifier = Modifier
-                .size(ProfilePictureSizeLarge)
-                .clip(CircleShape)
-                .border(
-                    width = 1.dp,
-                    color = Color.Black,
-                    shape = CircleShape
-                )
-        )
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .offset(x = if (isOwnProfile) {
-                    (SpaceSmall + 30.dp) / 2f
-                } else {
-                    0.dp
-                })
+                .offset(
+                    x =
+                    if (isOwnProfile) {
+                        (30.dp + SpaceSmall) / 2f
+                    } else 0.dp
+                )
         ) {
             Text(
                 text = user.username,
-                fontWeight = FontWeight.Bold,
-                style = androidx.compose.material3.MaterialTheme.typography.headlineLarge.copy(
+                style = MaterialTheme.typography.h1.copy(
                     fontSize = 24.sp
                 ),
                 textAlign = TextAlign.Center,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
             )
             if (isOwnProfile) {
                 Spacer(modifier = Modifier.width(SpaceSmall))
                 IconButton(
-                    modifier = Modifier
-                        .size(30.dp),
-                    onClick = onEditClick
+                    onClick = onEditClick,
+                    modifier = Modifier.size(30.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Edit,
@@ -87,20 +71,14 @@ fun ProfileHeaderSection(
                     )
                 }
             }
-
-
         }
         Spacer(modifier = Modifier.height(SpaceMedium))
         Text(
             text = user.description,
-            style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(SpaceLarge))
-        ProfileStats(
-            user = user,
-            isOwnProfile = isOwnProfile
-        )
+        ProfileStats(user = user, isOwnProfile = isOwnProfile)
     }
-    
 }

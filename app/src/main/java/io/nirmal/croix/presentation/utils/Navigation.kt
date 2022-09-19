@@ -12,6 +12,7 @@ import io.nirmal.croix.domain.models.Post
 import io.nirmal.croix.presentation.activity.ActivityScreen
 import io.nirmal.croix.presentation.chat.ChatScreen
 import io.nirmal.croix.presentation.create_post.CreatePostScreen
+import io.nirmal.croix.presentation.editProfile.EditProfileScreen
 import io.nirmal.croix.presentation.main_feed.MainFeedScreen
 import io.nirmal.croix.presentation.splash.SplashScreen
 import io.nirmal.croix.presentation.login.LoginScreen
@@ -65,6 +66,9 @@ fun Navigation(
                     commentCount = 6
                 )
             )
+        }
+        composable(Screen.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController)
         }
     }
 }
