@@ -13,6 +13,7 @@ import io.nirmal.croix.presentation.activity.ActivityScreen
 import io.nirmal.croix.presentation.chat.ChatScreen
 import io.nirmal.croix.presentation.create_post.CreatePostScreen
 import io.nirmal.croix.presentation.editProfile.EditProfileScreen
+import io.nirmal.croix.presentation.liked_by.PersonListScreen
 import io.nirmal.croix.presentation.main_feed.MainFeedScreen
 import io.nirmal.croix.presentation.splash.SplashScreen
 import io.nirmal.croix.presentation.login.LoginScreen
@@ -73,6 +74,9 @@ fun Navigation(
         }
         composable(Screen.SearchScreen.route) {
             SearchScreen(navController = navController)
+        }
+        composable(Screen.PersonListScreen.route) {
+            PersonListScreen(navController = navController)
         }
     }
 }
