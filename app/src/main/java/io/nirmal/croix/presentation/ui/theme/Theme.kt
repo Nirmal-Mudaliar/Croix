@@ -29,7 +29,7 @@ private val LightColorScheme = lightColorScheme(
     primary = Black,
     background = White,
     onBackground = Black,
-    onPrimary = Gray,
+    onPrimary = White,
     surface = surfaceColor,
     onSurface = Gray,
 

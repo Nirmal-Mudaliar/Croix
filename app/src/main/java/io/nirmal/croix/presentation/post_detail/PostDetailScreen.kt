@@ -1,10 +1,7 @@
 package io.nirmal.croix.presentation.post_detail
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -14,9 +11,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,13 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -39,10 +30,8 @@ import io.nirmal.croix.R
 import io.nirmal.croix.domain.models.Comment
 import io.nirmal.croix.domain.models.Post
 import io.nirmal.croix.presentation.components.ActionRow
-import io.nirmal.croix.presentation.components.Post
 import io.nirmal.croix.presentation.components.StandardToolbar
 import io.nirmal.croix.presentation.ui.theme.*
-import io.nirmal.croix.presentation.utils.Screen
 
 @Composable
 fun PostDetailScreen(
@@ -218,7 +207,7 @@ fun Comment(
                         painter = painterResource(id = R.drawable.profile),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(ProfilePictureSizeSmall)
+                            .size(ProfilePictureSizeExtraSmall)
                             .clip(CircleShape)
                     )
                     Spacer(modifier = Modifier.width(SpaceSmall))

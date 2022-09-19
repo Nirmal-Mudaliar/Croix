@@ -51,7 +51,7 @@ fun MainFeedScreen(
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "",
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = MaterialTheme.colorScheme.onBackground,
                     )
                 }
             }

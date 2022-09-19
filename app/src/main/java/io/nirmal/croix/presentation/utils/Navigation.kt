@@ -19,6 +19,7 @@ import io.nirmal.croix.presentation.login.LoginScreen
 import io.nirmal.croix.presentation.post_detail.PostDetailScreen
 import io.nirmal.croix.presentation.profile.ProfileScreen
 import io.nirmal.croix.presentation.register.RegisterScreen
+import io.nirmal.croix.presentation.search.SearchScreen
 
 @Composable
 fun Navigation(
@@ -69,6 +70,9 @@ fun Navigation(
         }
         composable(Screen.EditProfileScreen.route) {
             EditProfileScreen(navController = navController)
+        }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(navController = navController)
         }
     }
 }
