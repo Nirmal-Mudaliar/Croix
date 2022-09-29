@@ -21,6 +21,7 @@ import io.nirmal.croix.core.presentation.components.StandardTextField
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
 import io.nirmal.croix.core.util.Constants
+import io.nirmal.croix.feature_auth.presentation.util.AuthError
 
 
 @Composable
@@ -29,7 +30,11 @@ fun RegisterScreen(
     registerViewModel
     : RegisterViewModel = hiltViewModel(),
 ) {
-    val state = registerViewModel.state.value
+
+    val usernameState = registerViewModel.usernameState.value
+    val emailState = registerViewModel.emailState.value
+    val passwordState = registerViewModel.passwordState.value
+
     Box(modifier = Modifier
         .fillMaxSize()
         .padding(
@@ -52,19 +57,19 @@ fun RegisterScreen(
             )
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.emailText,
+                text = emailState.text,
                 onValueChange = {
                     registerViewModel.onEvent(RegisterEvent.EnteredEmail(it))
                 },
                 keyboardType = KeyboardType.Email,
-                error = when(state.emailError) {
-                   RegisterState.EmailError.FieldEmpty -> {
+                error = when(emailState.error) {
+                   is AuthError.FieldEmpty -> {
                        stringResource(id = R.string.this_field_cant_be_empty)
                    }
-                    RegisterState.EmailError.InvalidEmail -> {
+                    is AuthError.InvalidEmail -> {
                         stringResource(id = R.string.not_a_valid_email)
                     }
-                    null -> ""
+                    else -> ""
                },
                 hint = stringResource(R.string.email)
 
@@ -72,18 +77,18 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.usernameText,
+                text = usernameState.text,
                 onValueChange = {
                     registerViewModel.onEvent(RegisterEvent.EnteredUsername(it))
                 },
-                error = when(state.usernameError) {
-                    RegisterState.UsernameError.FieldEmpty -> {
+                error = when(usernameState.error) {
+                    is AuthError.FieldEmpty -> {
                         stringResource(id = R.string.this_field_cant_be_empty)
                     }
-                    RegisterState.UsernameError.InputTooShort -> {
+                    is AuthError.InputTooShort -> {
                         stringResource(id = R.string.input_too_short, Constants.MIN_USERNAME_LENGTH)
                     }
-                    null -> ""
+                    else -> ""
                 },
                 hint = stringResource(R.string.username)
 
@@ -91,25 +96,25 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(SpaceMedium))
             StandardTextField(
-                text = state.passwordText,
+                text = passwordState.text,
                 onValueChange = {
                     registerViewModel.onEvent(RegisterEvent.EnteredPassword(it))
                 },
                 hint = stringResource(R.string.password),
-                error = when(state.passwordError) {
-                    RegisterState.PasswordError.FieldEmpty -> {
+                error = when(passwordState.error) {
+                    is AuthError.FieldEmpty -> {
                         stringResource(id = R.string.this_field_cant_be_empty)
                     }
-                    RegisterState.PasswordError.InputTooShort -> {
+                    is AuthError.InputTooShort -> {
                         stringResource(id = R.string.input_too_short, Constants.MIN_PASSWORD_LENGTH)
                     }
-                    RegisterState.PasswordError.InvalidPassword -> {
+                    is AuthError.InvalidPassword -> {
                         stringResource(id = R.string.invalid_password)
                     }
-                    null -> ""
+                    else -> ""
                 },
                 keyboardType = KeyboardType.Password,
-                showPasswordToggle = state.isPasswordVisible,
+                showPasswordToggle = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
                     registerViewModel.onEvent(RegisterEvent.TogglePasswordVissibility)
                 }

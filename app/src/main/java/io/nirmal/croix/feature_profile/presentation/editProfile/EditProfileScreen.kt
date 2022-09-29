@@ -41,6 +41,8 @@ import io.nirmal.croix.core.presentation.theme.ProfilePictureSizeLarge
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
+import io.nirmal.croix.feature_post.presentation.util.PostDescriptionError
+import io.nirmal.croix.feature_profile.presentation.util.EditProfileError
 import kotlin.random.Random
 
 @Composable
@@ -93,7 +95,10 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     text = viewModel.usernameStates.value.text,
                     hint = stringResource(id = R.string.username),
-                    error = viewModel.usernameStates.value.error,
+                    error = when(viewModel.usernameStates.value.error) {
+                        is EditProfileError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                        else -> ""
+                    },
                     onValueChange = {
                         viewModel.setUsernameState(
                             StandardTextFieldStates(text = it)
@@ -109,7 +114,10 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     text = viewModel.githubTextFieldState.value.text,
                     hint = stringResource(id = R.string.github_profile_url),
-                    error = viewModel.githubTextFieldState.value.error,
+                    error = when(viewModel.githubTextFieldState.value.error) {
+                        is EditProfileError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                        else -> ""
+                    },
                     onValueChange = {
                         viewModel.setGithubTextFieldState(
                             StandardTextFieldStates(text = it)
@@ -125,7 +133,10 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     text = viewModel.instagramTextFieldState.value.text,
                     hint = stringResource(id = R.string.instagram_profile_url),
-                    error = viewModel.instagramTextFieldState.value.error,
+                    error = when(viewModel.instagramTextFieldState.value.error) {
+                        is EditProfileError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                        else -> ""
+                    },
                     onValueChange = {
                         viewModel.setInstagramTextFieldState(
                             StandardTextFieldStates(text = it)
@@ -141,7 +152,10 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     text = viewModel.linkedinTextFieldState.value.text,
                     hint = stringResource(id = R.string.linkedin_profile_url),
-                    error = viewModel.linkedinTextFieldState.value.error,
+                    error = when(viewModel.linkedinTextFieldState.value.error) {
+                        is EditProfileError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                        else -> ""
+                    },
                     onValueChange = {
                         viewModel.setLinkedinTextFieldState(
                             StandardTextFieldStates(text = it)
@@ -158,7 +172,10 @@ fun EditProfileScreen(
                         .fillMaxWidth(),
                     text = viewModel.bioState.value.text,
                     hint = stringResource(id = R.string.bio),
-                    error = viewModel.bioState.value.error,
+                    error = when(viewModel.bioState.value.error) {
+                        is EditProfileError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                        else -> ""
+                    },
                     onValueChange = {
                         viewModel.setBioState(
                             StandardTextFieldStates(text = it)

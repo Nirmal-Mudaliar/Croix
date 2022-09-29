@@ -25,6 +25,7 @@ import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
 import io.nirmal.croix.core.presentation.theme.SpaceSmall
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
+import io.nirmal.croix.feature_post.presentation.util.PostDescriptionError
 
 @Composable
 fun CreatePostScreen(
@@ -79,7 +80,10 @@ fun CreatePostScreen(
                     .fillMaxWidth(),
                 text = viewModel.descriptionState.value.text,
                 hint = stringResource(id = R.string.description),
-                error = viewModel.descriptionState.value.error,
+                error = when(viewModel.descriptionState.value.error) {
+                    is PostDescriptionError.FieldEmpty -> stringResource(id = R.string.this_field_cant_be_empty)
+                    else -> ""
+                 },
                 onValueChange = {
                     viewModel.setDescriptionState(
                         StandardTextFieldStates(text = it)

@@ -1,4 +1,4 @@
-package io.nirmal.croix.feature_profile.presentation.search
+package io.nirmal.croix.feature_profile.presentation.search.presentation
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

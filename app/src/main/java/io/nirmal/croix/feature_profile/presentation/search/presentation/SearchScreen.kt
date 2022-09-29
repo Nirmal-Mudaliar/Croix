@@ -22,6 +22,7 @@ import io.nirmal.croix.core.presentation.components.UserProfileItem
 import io.nirmal.croix.core.presentation.theme.IconSizeMedium
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
+import io.nirmal.croix.feature_profile.presentation.search.presentation.SearchViewModel
 
 @Composable
 fun SearchScreen(
@@ -52,7 +53,7 @@ fun SearchScreen(
                     .fillMaxWidth(),
                 text = viewModel.searchState.value.text,
                 hint = stringResource(id = R.string.search),
-                error = viewModel.searchState.value.error,
+                error = "",
                 onValueChange = {
                     viewModel.setSearchState(
                         StandardTextFieldStates(text = it)
