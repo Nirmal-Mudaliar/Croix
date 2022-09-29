@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="io.nirmal.croix">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".CroixApplication"
         android:allowBackup="true"
@@ -10,6 +12,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Croix"

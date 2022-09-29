@@ -6,8 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberScaffoldState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,6 +23,7 @@ import io.nirmal.croix.core.util.Screen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
+                    val scaffoldState = androidx.compose.material.rememberScaffoldState()
                     StandardScaffold(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -45,19 +49,12 @@ class MainActivity : ComponentActivity() {
                             Screen.ActivityScreen.route,
                             Screen.ProfileScreen.route
                         ),
-                        showBackArrow = navBackStackEntry?.destination?.route in listOf(
-                            Screen.PostDetailScreen.route,
-                            Screen.MessagesScreen.route,
-                            Screen.EditProfileScreen.route,
-                            Screen.SearchScreen.route,
-                            Screen.CreatePostScreen.route,
-                            Screen.PersonListScreen.route
-                        ),
+                        scaffoldState = scaffoldState,
                         onFabClick = {
                             navController.navigate(Screen.CreatePostScreen.route)
                         }
                     ) {
-                        Navigation(navController)
+                        Navigation(navController, scaffoldState)
                     }
 
                 }

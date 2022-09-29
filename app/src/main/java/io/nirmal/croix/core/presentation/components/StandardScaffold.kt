@@ -4,11 +4,16 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldState
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,10 +32,7 @@ fun StandardScaffold(
     navController: NavController,
     modifier: Modifier = Modifier,
     showBottomBar: Boolean = true,
-    showToolbar: Boolean = true,
-    toolbarTitle: String? = null,
-    showBackArrow: Boolean = true,
-    navActions: @Composable RowScope.()->Unit = {},
+    scaffoldState: androidx.compose.material.ScaffoldState,
     bottomNavItems: List<BottomNavItem> = listOf(
         BottomNavItem(
             route = Screen.MainFeedScreen.route,
@@ -104,7 +106,7 @@ fun StandardScaffold(
 
 
         },
-
+        scaffoldState = scaffoldState,
         floatingActionButton = {
             if (showBottomBar) {
                 androidx.compose.material3.FloatingActionButton(
@@ -125,6 +127,7 @@ fun StandardScaffold(
         },
 
         modifier = modifier,
+
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.Center
     ) {

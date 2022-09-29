@@ -1,6 +1,8 @@
 package io.nirmal.croix.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -23,7 +25,8 @@ import io.nirmal.croix.core.util.Screen
 
 @Composable
 fun Navigation(
-    navController: NavHostController
+    navController: NavHostController,
+    scaffoldState: androidx.compose.material.ScaffoldState
 ) {
 
     NavHost(
@@ -38,7 +41,10 @@ fun Navigation(
             LoginScreen(navController = navController)
         }
         composable(Screen.RegisterScreen.route) {
-            RegisterScreen(navController = navController)
+            RegisterScreen(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.MainFeedScreen.route) {
             MainFeedScreen(navController = navController)
