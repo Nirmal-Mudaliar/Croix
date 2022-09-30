@@ -1,6 +1,5 @@
 package io.nirmal.croix.feature_auth.presentation.register
 
-import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,11 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.nirmal.croix.R
 import io.nirmal.croix.core.domain.states.PasswordTextFieldState
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
-import io.nirmal.croix.core.util.Constants
 import io.nirmal.croix.core.util.Resource
 import io.nirmal.croix.core.util.UiText
 import io.nirmal.croix.feature_auth.domain.use_case.RegisterUseCase
-import io.nirmal.croix.feature_auth.presentation.util.AuthError
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -42,22 +39,22 @@ class RegisterViewModel @Inject constructor(
     fun onEvent(event: RegisterEvent) {
         when(event) {
             is RegisterEvent.EnteredUsername -> {
-                _usernameState.value = _usernameState.value.copy(
+                _usernameState.value = usernameState.value.copy(
                     text = event.value
                 )
             }
             is RegisterEvent.EnteredEmail -> {
-                _emailState.value = _emailState.value.copy(
+                _emailState.value = emailState.value.copy(
                     text = event.value
                 )
             }
             is RegisterEvent.EnteredPassword -> {
-                _passwordState.value = _passwordState.value.copy(
+                _passwordState.value = passwordState.value.copy(
                     text = event.value
                 )
             }
-            is RegisterEvent.TogglePasswordVissibility -> {
-                _passwordState.value = _passwordState.value.copy(
+            is RegisterEvent.TogglePasswordVisibility -> {
+                _passwordState.value = passwordState.value.copy(
                     isPasswordVisible = !passwordState.value.isPasswordVisible
                 )
             }

@@ -138,7 +138,7 @@ fun RegisterScreen(
                 keyboardType = KeyboardType.Password,
                 showPasswordToggle = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
-                    registerViewModel.onEvent(RegisterEvent.TogglePasswordVissibility)
+                    registerViewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 }
 
             )
