@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.nirmal.croix.R
 import io.nirmal.croix.core.domain.states.PasswordTextFieldState
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
+import io.nirmal.croix.core.presentation.util.UiEvent
 import io.nirmal.croix.core.util.Resource
 import io.nirmal.croix.core.util.UiText
 import io.nirmal.croix.feature_auth.domain.use_case.RegisterUseCase
@@ -113,8 +114,6 @@ class RegisterViewModel @Inject constructor(
     }
 
 
-    sealed class UiEvent {
-        data class SnackbarEvent(val uiText: UiText): UiEvent()
-    }
+
 
 }

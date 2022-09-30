@@ -24,6 +24,7 @@ import io.nirmal.croix.R
 import io.nirmal.croix.core.presentation.components.StandardTextField
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
+import io.nirmal.croix.core.presentation.util.UiEvent
 import io.nirmal.croix.core.presentation.util.asString
 import io.nirmal.croix.core.util.Screen
 import io.nirmal.croix.feature_auth.presentation.util.AuthError
@@ -43,12 +44,12 @@ fun LoginScreen(
     LaunchedEffect(key1 = true) {
         loginViewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is LoginViewModel.UiEvent.SnackbarEvent -> {
+                is UiEvent.SnackbarEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.value.asString(context)
                     )
                 }
-                is LoginViewModel.UiEvent.NavigateEvent -> {
+                is UiEvent.NavigateEvent -> {
                     navController.navigate(event.route)
                 }
             }

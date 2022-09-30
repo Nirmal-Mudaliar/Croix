@@ -1,8 +1,6 @@
 package io.nirmal.croix.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -15,7 +13,7 @@ import io.nirmal.croix.feature_post.presentation.create_post.CreatePostScreen
 import io.nirmal.croix.feature_profile.presentation.editProfile.EditProfileScreen
 import io.nirmal.croix.feature_post.presentation.person_list.PersonListScreen
 import io.nirmal.croix.feature_post.presentation.main_feed.MainFeedScreen
-import io.nirmal.croix.presentation.splash.SplashScreen
+import io.nirmal.croix.feature_auth.presentation.splash.SplashScreen
 import io.nirmal.croix.feature_auth.presentation.login.LoginScreen
 import io.nirmal.croix.feature_post.presentation.post_detail.PostDetailScreen
 import io.nirmal.croix.feature_profile.presentation.profile.ProfileScreen

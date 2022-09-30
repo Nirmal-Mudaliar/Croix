@@ -8,8 +8,10 @@ import dagger.hilt.components.SingletonComponent
 import io.nirmal.croix.feature_auth.data.remote.AuthApi
 import io.nirmal.croix.feature_auth.data.repository.AuthRepositoryImpl
 import io.nirmal.croix.feature_auth.domain.repository.AuthRepository
+import io.nirmal.croix.feature_auth.domain.use_case.AuthenticateUseCase
 import io.nirmal.croix.feature_auth.domain.use_case.LoginUseCase
 import io.nirmal.croix.feature_auth.domain.use_case.RegisterUseCase
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -22,9 +24,10 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthApi(): AuthApi {
+    fun provideAuthApi(client: OkHttpClient): AuthApi {
         return Retrofit.Builder()
             .baseUrl(AuthApi.BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthApi::class.java)
@@ -48,5 +51,11 @@ object AuthModule {
     @Singleton
     fun provideLoginUseCae(repository: AuthRepository): LoginUseCase {
         return LoginUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthenticateUseCae(repository: AuthRepository): AuthenticateUseCase {
+        return AuthenticateUseCase(repository)
     }
 }

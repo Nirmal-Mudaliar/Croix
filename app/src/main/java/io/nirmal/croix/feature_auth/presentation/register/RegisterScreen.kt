@@ -25,6 +25,7 @@ import io.nirmal.croix.R
 import io.nirmal.croix.core.presentation.components.StandardTextField
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
+import io.nirmal.croix.core.presentation.util.UiEvent
 import io.nirmal.croix.core.presentation.util.asString
 import io.nirmal.croix.core.util.Constants
 import io.nirmal.croix.feature_auth.presentation.util.AuthError
@@ -47,12 +48,14 @@ fun RegisterScreen(
     LaunchedEffect(key1 = true) {
         registerViewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is RegisterViewModel.UiEvent.SnackbarEvent -> {
+                is UiEvent.SnackbarEvent -> {
                     scaffoldState.snackbarHostState.showSnackbar(
-                        message = event.uiText.asString(context),
+                        message = event.value.asString(context),
                         duration = SnackbarDuration.Short
                     )
                 }
+
+                else -> {}
             }
         }
     }

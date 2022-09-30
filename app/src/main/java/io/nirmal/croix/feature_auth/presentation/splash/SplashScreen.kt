@@ -1,4 +1,4 @@
-package io.nirmal.croix.presentation.splash
+package io.nirmal.croix.feature_auth.presentation.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.foundation.Image
@@ -15,13 +15,21 @@ import io.nirmal.croix.R
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.draw.scale
+import androidx.hilt.navigation.compose.hiltViewModel
+import io.nirmal.croix.core.presentation.util.UiEvent
 import io.nirmal.croix.core.util.Screen
 import io.nirmal.croix.core.util.Constants
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.withContext
 
 @Composable
 fun SplashScreen(
-    navController: NavController
+    navController: NavController,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    viewModel: SplashViewModel = hiltViewModel(),
 ) {
     val scale = remember {
         Animatable(0f)
@@ -30,18 +38,30 @@ fun SplashScreen(
         OvershootInterpolator(2f)
     }
     LaunchedEffect(key1 = true) {
-        scale.animateTo(
-            targetValue = 0.7f,
-            animationSpec = tween(
-                durationMillis = 500,
-                easing = {
-                    overshootInterpolator.getInterpolation(it)
-                }
+        withContext(dispatcher) {
+            scale.animateTo(
+                targetValue = 0.7f,
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = {
+                        overshootInterpolator.getInterpolation(it)
+                    }
+                )
             )
-        )
-        delay(Constants.SPLASH_SCREEN_DURATION)
-        navController.popBackStack()
-        navController.navigate(Screen.LoginScreen.route)
+            delay(Constants.SPLASH_SCREEN_DURATION)
+        }
+    }
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when(event) {
+                is UiEvent.NavigateEvent -> {
+                    navController.popBackStack()
+                    navController.navigate(event.route)
+                }
+                else -> Unit
+            }
+
+        }
     }
     Box(
         modifier = Modifier.fillMaxSize(),
