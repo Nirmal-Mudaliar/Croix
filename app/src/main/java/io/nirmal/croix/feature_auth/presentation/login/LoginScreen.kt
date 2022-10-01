@@ -2,6 +2,7 @@ package io.nirmal.croix.feature_auth.presentation.login
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScaffoldState
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -39,6 +41,7 @@ fun LoginScreen(
 ) {
     val emailState = loginViewModel.emailState.value
     val passwordState = loginViewModel.passwordState.value
+    val loginState = loginViewModel.loginState.value
     val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
@@ -117,11 +120,23 @@ fun LoginScreen(
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
-                Text(
-                    text = stringResource(id = R.string.login),
-                    color = Color.White
+                Row(modifier = Modifier
+                    .align(CenterVertically)) {
+                    if(loginState.isLoading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.width(30.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Spacer(modifier = Modifier.width(SpaceMedium))
+                    }
 
-                )
+                    Text(
+                        text = stringResource(id = R.string.login),
+                        color = Color.White
+
+                    )
+                }
+
             }
         }
         Text(text = buildAnnotatedString {

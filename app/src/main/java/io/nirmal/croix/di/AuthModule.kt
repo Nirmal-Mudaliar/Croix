@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.nirmal.croix.feature_auth.data.remote.AuthApi
+import io.nirmal.croix.feature_auth.data.data_source.remote.AuthApi
 import io.nirmal.croix.feature_auth.data.repository.AuthRepositoryImpl
 import io.nirmal.croix.feature_auth.domain.repository.AuthRepository
 import io.nirmal.croix.feature_auth.domain.use_case.AuthenticateUseCase
@@ -14,7 +14,6 @@ import io.nirmal.croix.feature_auth.domain.use_case.RegisterUseCase
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 

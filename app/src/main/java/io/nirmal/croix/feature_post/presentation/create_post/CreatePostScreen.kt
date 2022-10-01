@@ -1,5 +1,7 @@
 package io.nirmal.croix.feature_post.presentation.create_post
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -32,6 +34,13 @@ fun CreatePostScreen(
     navController: NavController,
     viewModel: CreatePostViewModel = hiltViewModel(),
 ) {
+
+    val galleryLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) {
+        viewModel.onEvent(CreatePostEvent.PickImage(it))
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +72,7 @@ fun CreatePostScreen(
                         shape = androidx.compose.material.MaterialTheme.shapes.medium
                     )
                     .clickable {
-
+                        galleryLauncher.launch("image/*")
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -85,9 +94,7 @@ fun CreatePostScreen(
                     else -> ""
                  },
                 onValueChange = {
-                    viewModel.setDescriptionState(
-                        StandardTextFieldStates(text = it)
-                    )
+                    viewModel.onEvent(CreatePostEvent.EnterDescription(it))
                 },
                 leadingIcon = Icons.Default.Description,
                 singleLine = false,
@@ -97,7 +104,7 @@ fun CreatePostScreen(
             )
             Spacer(modifier = Modifier.height(SpaceLarge))
             androidx.compose.material3.Button(
-                onClick = { /*TODO*/ },
+                onClick = { viewModel.onEvent(CreatePostEvent.PostImage) },
                 modifier = Modifier
                     .align(Alignment.End)
             ) {

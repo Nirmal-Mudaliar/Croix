@@ -1,9 +1,6 @@
 package io.nirmal.croix.feature_auth.domain.repository
 
-import io.nirmal.croix.core.data.dto.response.BasicApiResponse
-import io.nirmal.croix.core.util.Resource
 import io.nirmal.croix.core.util.SimpleResource
-import io.nirmal.croix.feature_auth.data.dto.request.CreateAccountRequest
 
 interface AuthRepository {
 

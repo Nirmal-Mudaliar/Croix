@@ -2,15 +2,13 @@ package io.nirmal.croix.feature_auth.data.repository
 
 import android.content.SharedPreferences
 import io.nirmal.croix.R
-import io.nirmal.croix.core.data.dto.response.BasicApiResponse
-import io.nirmal.croix.core.util.Constants
 import io.nirmal.croix.core.util.Constants.KEY_JWT_TOKEN
 import io.nirmal.croix.core.util.Resource
 import io.nirmal.croix.core.util.SimpleResource
 import io.nirmal.croix.core.util.UiText
-import io.nirmal.croix.feature_auth.data.dto.request.CreateAccountRequest
-import io.nirmal.croix.feature_auth.data.dto.request.LoginRequest
-import io.nirmal.croix.feature_auth.data.remote.AuthApi
+import io.nirmal.croix.feature_auth.data.data_source.remote.request.CreateAccountRequest
+import io.nirmal.croix.feature_auth.data.data_source.remote.request.LoginRequest
+import io.nirmal.croix.feature_auth.data.data_source.remote.AuthApi
 import io.nirmal.croix.feature_auth.domain.repository.AuthRepository
 import okio.IOException
 import retrofit2.HttpException

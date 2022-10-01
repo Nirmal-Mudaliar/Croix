@@ -1,10 +1,9 @@
-package io.nirmal.croix.feature_auth.data.remote
+package io.nirmal.croix.feature_auth.data.data_source.remote
 
-import com.nirmal.data.response.AuthResponse
+import io.nirmal.croix.feature_auth.data.data_source.remote.response.AuthResponse
 import io.nirmal.croix.core.data.dto.response.BasicApiResponse
-import io.nirmal.croix.feature_auth.data.dto.request.CreateAccountRequest
-import io.nirmal.croix.feature_auth.data.dto.request.LoginRequest
-import retrofit2.Response
+import io.nirmal.croix.feature_auth.data.data_source.remote.request.CreateAccountRequest
+import io.nirmal.croix.feature_auth.data.data_source.remote.request.LoginRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
