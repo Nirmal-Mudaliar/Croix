@@ -17,7 +17,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.ui.draw.scale
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.nirmal.croix.core.presentation.util.UiEvent
-import io.nirmal.croix.core.util.Screen
 import io.nirmal.croix.core.util.Constants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +53,7 @@ fun SplashScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is UiEvent.NavigateEvent -> {
+                is UiEvent.Navigate -> {
                     navController.popBackStack()
                     navController.navigate(event.route)
                 }

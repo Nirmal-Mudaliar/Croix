@@ -1,4 +1,4 @@
-package io.nirmal.croix.feature_profile.presentation.search
+package io.nirmal.croix.feature_profile.presentation.search.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

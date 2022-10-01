@@ -34,7 +34,6 @@ import java.io.IOException
 class PostRepositoryImpl(
     private val api: PostApi,
     private val gson: Gson,
-    private val appContext: Context
 ): PostRepository {
 
     override val posts: Flow<PagingData<Post>>
@@ -42,43 +41,41 @@ class PostRepositoryImpl(
             PostSource(api)
         }.flow
 
-    override suspend fun createPost(description: String, imageUri: Uri): SimpleResource {
-        val request = CreatePostRequest(description = description)
-        val file = withContext(Dispatchers.IO) {
-            appContext.contentResolver.openFileDescriptor(imageUri, "r")?.let { fd ->
-                val inputStream = FileInputStream(fd.fileDescriptor)
-                val file = File(
-                    appContext.cacheDir,
-                    appContext.contentResolver.getFileName(imageUri)
-                )
-                val outputStream = FileOutputStream(file)
-                inputStream.copyTo(outputStream)
-                file
-            }
-        } ?: return Resource.Error(
-                uiText = UiText.StringResource(R.string.error_file_not_found),
-                data = null
-            )
-
+    override suspend fun createPost(
+        description: String,
+        imageUri: Uri
+    ): SimpleResource {
+        val request = CreatePostRequest(description)
+        val file = imageUri.toFile()
         return try {
             val response = api.createPost(
                 postData = MultipartBody.Part
-                    .createFormData("post_data", gson.toJson(request)),
-                postImaage = MultipartBody.Part
-                    .createFormData(name = "post_image", filename = file.name, body = file.asRequestBody())
-
+                    .createFormData(
+                        "post_data",
+                        gson.toJson(request)
+                    ),
+                postImage = MultipartBody.Part
+                    .createFormData(
+                        name = "post_image",
+                        filename = file.name,
+                        body = file.asRequestBody()
+                    )
             )
             if (response.successful) {
                 Resource.Success(Unit)
             } else {
                 response.message?.let { msg ->
-                    Resource.Error(uiText = UiText.DynamicString(msg))
-                } ?: Resource.Error(uiText = UiText.StringResource(R.string.error_unknown))
+                    Resource.Error(UiText.DynamicString(msg))
+                } ?: Resource.Error(UiText.StringResource(R.string.error_unknown))
             }
         } catch (e: IOException) {
-            Resource.Error(uiText = UiText.StringResource(R.string.error_couldnt_reach_server))
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.error_couldnt_reach_server)
+            )
         } catch (e: HttpException) {
-            Resource.Error(uiText = UiText.StringResource(R.string.error_something_went_wrong))
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.error_something_went_wrong)
+            )
         }
     }
 }

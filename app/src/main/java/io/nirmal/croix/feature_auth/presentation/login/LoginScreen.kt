@@ -3,9 +3,11 @@ package io.nirmal.croix.feature_auth.presentation.login
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScaffoldState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +28,7 @@ import io.nirmal.croix.R
 import io.nirmal.croix.core.presentation.components.StandardTextField
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
 import io.nirmal.croix.core.presentation.theme.SpaceMedium
+import io.nirmal.croix.core.presentation.theme.SpaceSmall
 import io.nirmal.croix.core.presentation.util.UiEvent
 import io.nirmal.croix.core.presentation.util.asString
 import io.nirmal.croix.core.util.Screen
@@ -47,12 +50,12 @@ fun LoginScreen(
     LaunchedEffect(key1 = true) {
         loginViewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is UiEvent.SnackbarEvent -> {
+                is UiEvent.ShowSnackbar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.value.asString(context)
                     )
                 }
-                is UiEvent.NavigateEvent -> {
+                is UiEvent.Navigate -> {
                     navController.navigate(event.route)
                 }
             }
@@ -106,7 +109,7 @@ fun LoginScreen(
                     else -> ""
                 },
                 keyboardType = KeyboardType.Password,
-                showPasswordToggle = passwordState.isPasswordVisible,
+                isPasswordVisible = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
                     loginViewModel.onEvent(LoginEvent.TogglePasswordVisibility)
                 }
@@ -120,20 +123,17 @@ fun LoginScreen(
                 modifier = Modifier
                     .align(Alignment.End)
             ) {
-                Row(modifier = Modifier
-                    .align(CenterVertically)) {
-                    if(loginState.isLoading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.width(30.dp),
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                        Spacer(modifier = Modifier.width(SpaceMedium))
-                    }
-
-                    Text(
-                        text = stringResource(id = R.string.login),
-                        color = Color.White
-
+                Text(
+                    text = stringResource(id = R.string.login),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Spacer(modifier = Modifier.width(SpaceSmall))
+                if (loginState.isLoading) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .align(CenterVertically)
                     )
                 }
 

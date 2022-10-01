@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.nirmal.croix.R
 import io.nirmal.croix.core.domain.states.PasswordTextFieldState
 import io.nirmal.croix.core.domain.states.StandardTextFieldStates
 import io.nirmal.croix.core.presentation.util.UiEvent
@@ -13,7 +12,6 @@ import io.nirmal.croix.core.util.Resource
 import io.nirmal.croix.core.util.Screen
 import io.nirmal.croix.core.util.UiText
 import io.nirmal.croix.feature_auth.domain.use_case.LoginUseCase
-import io.nirmal.croix.feature_auth.presentation.register.RegisterState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -76,14 +74,14 @@ class LoginViewModel @Inject constructor(
             when(loginResult.result) {
                 is Resource.Success -> {
                     _eventFlow.emit(
-                        UiEvent.NavigateEvent(Screen.MainFeedScreen.route)
+                        UiEvent.Navigate(Screen.MainFeedScreen.route)
                     )
                     _emailState.value = emailState.value.copy(error = null)
                     _passwordState.value = passwordState.value.copy(error = null)
                 }
                 is Resource.Error -> {
                     _eventFlow.emit(
-                        UiEvent.SnackbarEvent(loginResult.result.uiText ?: UiText.unknownError())
+                        UiEvent.ShowSnackbar(loginResult.result.uiText ?: UiText.unknownError())
 
                     )
                 }

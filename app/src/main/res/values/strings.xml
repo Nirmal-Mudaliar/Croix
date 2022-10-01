@@ -63,4 +63,8 @@
     <string name="error_something_went_wrong">Oops! Something went wrong. PLease try again.</string>
     <string name="success_registration">Successfully registered an account. You can login now</string>
     <string name="error_file_not_found">Oops! the file couldn\'t be found</string>
+    <string name="post_image">Post image</string>
+    <string name="error_no_image_picked">No image is picked</string>
+    <string name="error_description_blank">Description can not be empty</string>
+    <string name="post_created">Successfully created a post</string>
 </resources>

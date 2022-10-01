@@ -3,6 +3,8 @@ package io.nirmal.croix.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import coil.ImageLoader
+import coil.decode.SvgDecoder
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -48,5 +50,16 @@ object AppModule {
     @Singleton
     fun provideGson(): Gson {
         return Gson()
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageLoader(app: Application): ImageLoader {
+        return ImageLoader.Builder(app)
+            .crossfade(true)
+            .componentRegistry {
+                add(SvgDecoder(app))
+            }
+            .build()
     }
 }

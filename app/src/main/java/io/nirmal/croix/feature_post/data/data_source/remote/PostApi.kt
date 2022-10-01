@@ -19,7 +19,7 @@ interface PostApi {
     @POST("/api/post/create")
     suspend fun createPost(
         @Part postData: MultipartBody.Part,
-        @Part postImaage: MultipartBody.Part
+        @Part postImage: MultipartBody.Part
     ): BasicApiResponse<Unit>
 
     companion object {

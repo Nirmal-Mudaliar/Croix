@@ -5,6 +5,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,30 +19,29 @@ import io.nirmal.croix.R
 fun StandardToolbar(
     navController: NavController,
     modifier: Modifier = Modifier,
+    onNavigateUp: () -> Unit = {},
     showBackArrow: Boolean = false,
-    navActions: @Composable RowScope.()-> Unit = {},
-    title: @Composable () -> Unit,
-    
+    navActions: @Composable RowScope.() -> Unit = {},
+    title: @Composable () -> Unit = {},
 ) {
-    
     TopAppBar(
         title = title,
-        navigationIcon = if (showBackArrow) {
+        modifier = modifier,
+        navigationIcon = if(showBackArrow) {
             {
                 IconButton(onClick = {
-                    navController.navigateUp()
+                    onNavigateUp()
                 }) {
-                    Icon(imageVector = Icons.Default.ArrowBackIos,
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
                         contentDescription = stringResource(id = R.string.back),
                         tint = MaterialTheme.colorScheme.onBackground
                     )
-
                 }
             }
         } else null,
         actions = navActions,
-        backgroundColor = MaterialTheme.colorScheme.background,
-        elevation = 5.dp
+        backgroundColor = MaterialTheme.colorScheme.surface,
+        elevation = 0.dp
     )
-    
 }

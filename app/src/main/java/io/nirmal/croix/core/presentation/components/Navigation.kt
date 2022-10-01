@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import coil.ImageLoader
 import io.nirmal.croix.core.domain.models.Post
 import io.nirmal.croix.feature_activity.presentation.ActivityScreen
 import io.nirmal.croix.feature_chat.presentation.ChatScreen
@@ -18,13 +19,14 @@ import io.nirmal.croix.feature_auth.presentation.login.LoginScreen
 import io.nirmal.croix.feature_post.presentation.post_detail.PostDetailScreen
 import io.nirmal.croix.feature_profile.presentation.profile.ProfileScreen
 import io.nirmal.croix.feature_auth.presentation.register.RegisterScreen
-import io.nirmal.croix.feature_profile.presentation.search.SearchScreen
+import io.nirmal.croix.feature_profile.presentation.search.presentation.SearchScreen
 import io.nirmal.croix.core.util.Screen
 
 @Composable
 fun Navigation(
     navController: NavHostController,
-    scaffoldState: androidx.compose.material.ScaffoldState
+    scaffoldState: androidx.compose.material.ScaffoldState,
+    imageLoader: ImageLoader
 ) {
 
     NavHost(
@@ -57,7 +59,13 @@ fun Navigation(
             ProfileScreen(navController = navController)
         }
         composable(Screen.CreatePostScreen.route) {
-            CreatePostScreen(navController = navController)
+            CreatePostScreen(
+                navController = navController,
+                onNavigateUp = navController::navigateUp,
+                onNavigate = navController::navigate,
+                scaffoldState = scaffoldState,
+                imageLoader = imageLoader
+            )
         }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(

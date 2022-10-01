@@ -24,10 +24,10 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             when(authenticateUseCase()) {
                 is Resource.Success -> {
-                    _eventFlow.emit(UiEvent.NavigateEvent(Screen.MainFeedScreen.route))
+                    _eventFlow.emit(UiEvent.Navigate(Screen.MainFeedScreen.route))
                 }
                 is Resource.Error -> {
-                    _eventFlow.emit(UiEvent.NavigateEvent(Screen.LoginScreen.route))
+                    _eventFlow.emit(UiEvent.Navigate(Screen.LoginScreen.route))
 
                 }
             }

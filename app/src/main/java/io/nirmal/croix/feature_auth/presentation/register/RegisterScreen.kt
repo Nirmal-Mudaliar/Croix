@@ -48,7 +48,7 @@ fun RegisterScreen(
     LaunchedEffect(key1 = true) {
         registerViewModel.eventFlow.collectLatest { event ->
             when(event) {
-                is UiEvent.SnackbarEvent -> {
+                is UiEvent.ShowSnackbar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.value.asString(context),
                         duration = SnackbarDuration.Short
@@ -139,7 +139,7 @@ fun RegisterScreen(
                     else -> ""
                 },
                 keyboardType = KeyboardType.Password,
-                showPasswordToggle = passwordState.isPasswordVisible,
+                isPasswordVisible = passwordState.isPasswordVisible,
                 onPasswordToggleClick = {
                     registerViewModel.onEvent(RegisterEvent.TogglePasswordVisibility)
                 }

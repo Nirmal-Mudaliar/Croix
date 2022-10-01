@@ -15,14 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import io.nirmal.croix.core.presentation.components.StandardScaffold
 import io.nirmal.croix.core.presentation.theme.CroixTheme
 import io.nirmal.croix.core.presentation.components.Navigation
 import io.nirmal.croix.core.util.Screen
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +58,7 @@ class MainActivity : ComponentActivity() {
                             navController.navigate(Screen.CreatePostScreen.route)
                         }
                     ) {
-                        Navigation(navController, scaffoldState)
+                        Navigation(navController, scaffoldState, imageLoader)
                     }
 
                 }
