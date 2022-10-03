@@ -109,7 +109,7 @@ fun CreatePostScreen(
                     color = MaterialTheme.colorScheme.onBackground
                 )
             },
-            navController = navController
+
         )
         Column(
             modifier = Modifier

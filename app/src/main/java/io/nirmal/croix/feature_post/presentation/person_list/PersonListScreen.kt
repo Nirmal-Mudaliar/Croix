@@ -1,5 +1,6 @@
 package io.nirmal.croix.feature_post.presentation.person_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -18,17 +19,19 @@ import io.nirmal.croix.core.presentation.components.StandardToolbar
 import io.nirmal.croix.core.presentation.components.UserProfileItem
 import io.nirmal.croix.core.presentation.theme.IconSizeMedium
 import io.nirmal.croix.core.presentation.theme.SpaceLarge
+import io.nirmal.croix.core.util.Screen
 
 @Composable
 fun PersonListScreen(
-    navController: NavController
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             showBackArrow = true,
             title = {
                 Text(
@@ -47,6 +50,7 @@ fun PersonListScreen(
             items(10) {
                 UserProfileItem(
                     user = User(
+                        userId = "63384c4638601217c1d6c4ba",
                         profilePictureUrl = "",
                         username = "Nirmal Mudaliar",
                         description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\n" +
@@ -65,7 +69,8 @@ fun PersonListScreen(
                                 .size(IconSizeMedium)
                         )
 
-                    }
+                    },
+
                 )
             }
         }

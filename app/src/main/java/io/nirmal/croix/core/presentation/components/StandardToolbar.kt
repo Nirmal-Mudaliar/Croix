@@ -17,7 +17,6 @@ import io.nirmal.croix.R
 
 @Composable
 fun StandardToolbar(
-    navController: NavController,
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit = {},
     showBackArrow: Boolean = false,

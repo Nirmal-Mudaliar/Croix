@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import coil.ImageLoader
 import io.nirmal.croix.core.domain.models.Post
 import io.nirmal.croix.feature_activity.presentation.ActivityScreen
@@ -35,10 +37,13 @@ fun Navigation(
         modifier = Modifier.fillMaxSize()
     ) {
         composable(Screen.SplashScreen.route) {
-            SplashScreen(navController = navController)
+            SplashScreen(
+                onPopBackStack = navController::popBackStack,
+                onNavigate = navController::navigate
+            )
         }
         composable(Screen.LoginScreen.route) {
-            LoginScreen(navController = navController, scaffoldState = scaffoldState)
+            LoginScreen(onNavigate = navController::navigate, scaffoldState = scaffoldState)
         }
         composable(Screen.RegisterScreen.route) {
             RegisterScreen(
@@ -47,16 +52,39 @@ fun Navigation(
             )
         }
         composable(Screen.MainFeedScreen.route) {
-            MainFeedScreen(navController = navController, scaffoldState = scaffoldState)
+            MainFeedScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.ChatScreen.route) {
-            ChatScreen(navController = navController)
+            ChatScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+            )
         }
         composable(Screen.ActivityScreen.route) {
-            ActivityScreen(navController = navController)
+            ActivityScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+            )
         }
-        composable(Screen.ProfileScreen.route) {
-            ProfileScreen(navController = navController)
+        composable(
+            route = Screen.ProfileScreen.route + "?userId={userId}",
+            arguments = listOf(
+                navArgument(name = "userId") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) {
+            ProfileScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+                scaffoldState = scaffoldState
+            )
         }
         composable(Screen.CreatePostScreen.route) {
             CreatePostScreen(
@@ -69,7 +97,8 @@ fun Navigation(
         }
         composable(Screen.PostDetailScreen.route) {
             PostDetailScreen(
-                navController = navController,
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
                 post = Post(
                     username = "Nirmal Mudaliar",
                     imageUrl = "",
@@ -81,13 +110,22 @@ fun Navigation(
             )
         }
         composable(Screen.EditProfileScreen.route) {
-            EditProfileScreen(navController = navController)
+            EditProfileScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+            )
         }
         composable(Screen.SearchScreen.route) {
-            SearchScreen(navController = navController)
+            SearchScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+            )
         }
         composable(Screen.PersonListScreen.route) {
-            PersonListScreen(navController = navController)
+            PersonListScreen(
+                onNavigate = navController::navigate,
+                onNavigateUp = navController::navigateUp,
+            )
         }
     }
 }

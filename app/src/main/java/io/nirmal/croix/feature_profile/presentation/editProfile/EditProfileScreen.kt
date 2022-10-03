@@ -47,14 +47,15 @@ import kotlin.random.Random
 
 @Composable
 fun EditProfileScreen(
-    navController: NavController,
+    onNavigate: (String) -> Unit = {},
+    onNavigateUp: () -> Unit = {},
     viewModel: EditProfileViewModel = hiltViewModel(),
     profilePictureSize : Dp = ProfilePictureSizeLarge,
 ) {
 //    val bannerHeight = (LocalConfiguration.current.screenWidthDp / 2.5f).dp
     Column(modifier = Modifier.fillMaxSize()) {
         StandardToolbar(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
             showBackArrow = true,
             title = {
                 Text(
